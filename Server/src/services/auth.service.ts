@@ -44,5 +44,14 @@ export class AuthService {
       throw new HttpException('Invalid Credentials', HttpStatus.UNAUTHORIZED);
     }
   }
+
+  async findUser(userEmail: string): Promise<User | null> {
+    const foundUser = await this.userModel.findOne({ email: userEmail });
+    if (!foundUser) {
+      throw new HttpException('No User Found', HttpStatus.NOT_FOUND);
+    } else {
+      return foundUser;
+    }
+  }
 }
 export default AuthService;
