@@ -16,17 +16,24 @@ const Login = () => {
   const handleLogin = async () => {
     login({ email: userEmail, password: userPassword });
 
-    const payload = user;
+    const payload = {
+      email: userEmail,
+      password: userPassword,
+    };
     const response = await axios.post(
       "http://localhost:8000/user/login",
       payload
     );
+
     if (response.data) {
       toast.success("User LoggedIn Successfuly!!!");
+
       isAuthenticated = true;
+      navigate("/home");
+    } else {
+      toast.error("Invalid Credentials");
     }
     console.log(userEmail, userPassword);
-    navigate("/home");
   };
 
   return (

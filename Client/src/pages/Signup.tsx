@@ -18,7 +18,11 @@ const Signup = () => {
       name: userName,
     });
 
-    const payload = newuser;
+    const payload = {
+      email: userEmail,
+      password: userPassword,
+      name: userName,
+    };
 
     const response = await axios.post(
       "http://localhost:8000/user/signup",

@@ -1,4 +1,4 @@
-import { Body, Controller, Inject, Post } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { privateDecrypt } from 'crypto';
 import { User } from 'src/entity/User.schema';
@@ -18,5 +18,11 @@ export class UserController {
   Login(@Body() data: Partial<User>) {
     const LoggedInUser = this.authService.Login(data);
     return LoggedInUser;
+  }
+
+  @Get(':email')
+  FindUser(@Param('email') email: string) {
+    const user = this.authService.findUser(email);
+    return user;
   }
 }
